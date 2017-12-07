@@ -1,0 +1,9 @@
+#+TITLE: Machine Learning(-)Linear Regression
+#+DATE: 2017-04-21
+#+_CATEGORIES: learning
+#+TAGS: machine 
+
+* Normal Equation
+$$ \theta = (X^TX)^{-1}X^Ty $$
+在特征值少于 1w 时则可以使用标准方程一次得解，但如果特征值过多时，需要使用梯度下降方程进行求解.
+标准方程的复杂度为$\mathrm{O}(n^3)$, 梯度下降为$\mathrm{O}(n^2)$

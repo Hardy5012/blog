@@ -1,0 +1,19 @@
+#+TITLE: linux 环境
+#+DATE: 2017-11-16
+#+LAYOUT: post
+#+TAGS: linux
+#+CATEGORIES: notes
+
+* 翻墙
+** ssh
+
+   #+BEGIN_SRC sh
+	 sudo ssh -qTfnN -D 8087 user@remote-hosts
+   #+END_SRC
+上面的 8087 是本地未被占用的端口，可以自己选择。其它参数的意思是：
+-q :- be very quite, we are acting only as a tunnel.
+-T :- Do not allocate a pseudo tty, we are only acting a tunnel.
+-f :- move the ssh process to background, as we don’t want to interact with this ssh session directly.
+-N :- Do not execute remote command.
+-n :- redirect standard input to /dev/null.
+{{{more}}}

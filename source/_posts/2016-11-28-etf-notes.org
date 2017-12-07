@@ -1,0 +1,16 @@
+#+TITLE: ETF notes
+#+DATE: 2016-11-28
+#+SETUPFILE: /home/huaming_li/github/blog/setupfile.org
+#+JEKYLL_LAYOUT: post
+#+JEKYLL_CATEGORIES: notes
+#+JEKYLL_TAGS: ETF
+#+JEKYLL_PUBLISHED: true
+
+* 预估现金
+**** 预估现金为负时，表示 ETF 的市值要比篮子市值少，在做赎回时会先从资金账户中先扣除这部分钱
+
+{{{more}}}
+* 4A1B
+** A1:期货与现货的价差
+** A2:A2 交易，也就是市场中很多人称为α套利的交易产品
+** A3:ETF
