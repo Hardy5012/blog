@@ -17,3 +17,91 @@
 -N :- Do not execute remote command.
 -n :- redirect standard input to /dev/null.
 {{{more}}}
+* gcc
+** Install dependencies
+
+   #+BEGIN_SRC sh
+yum install gmp-devel mpfr-devel libmpc-devel
+   #+END_SRC
+** Downloading gcc
+You can download the GCC source code from the [[https://ftp.gnu.org/gnu/gcc/][official GNU ftp.]] 
+
+#+BEGIN_SRC sh
+  curl https://ftp.gnu.org/gnu/gcc/gcc-7.2.0/gcc-7.2.0.tar.xz -O
+  tar --xz -xvf gcc-7.2.0.tar.xz
+#+END_SRC
+** Configuration and install
+
+   #+BEGIN_SRC sh
+	 mkdir gcc-build
+	 cd gcc-build
+	 ../gcc-7.2.0/configure --enable-languages=c,c++ --prefix=/usr
+	 make
+	 make install
+   #+END_SRC
+** replace libstdc++
+   check version
+   #+BEGIN_SRC sh
+	 strings /usr/lib64/libstdc++.so.6 | grep GLIBC
+   #+END_SRC
+   find lib
+
+   #+BEGIN_SRC sh
+	 find / -name "libstdc++.so*"
+   #+END_SRC
+
+* Adding a Yum Repository
+** To define a new repository, you can either add a [repository] section to the /etc/yum.conf file, or to a .repo file in the /etc/yum.repos.d/ directory
+Yum repositories commonly provide their own .repo file. To add such a repository to your system and enable it, run the following command as root:
+
+#+BEGIN_SRC sh
+  yum-config-manager --add-repo repository_url
+#+END_SRC
+
+** Enabling a Yum Repository
+
+   #+BEGIN_SRC sh
+	 yum-config-manager --enable example\*
+   #+END_SRC
+* clang 5.0
+** add yum repo
+
+   #+BEGIN_SRC sh
+	 yum-config-manager --add-repo https://copr.fedorainfracloud.org/coprs/alonid/llvm-5.0.0/repo/epel-7/alonid-llvm-5.0.0-epel-7.repo
+	 yum-config-manager --enable  alonid-llvm-5.0.0-epel-7
+   #+END_SRC
+ [[https://copr.fedorainfracloud.org/coprs/alonid/llvm-5.0.0/][fedora cop]]r 会提供最新安装包的 repo
+** yum install clang-5.0.0
+** You may need to set PATH to include /opt/llvm-5.0.0/bin. LD_LIBRARY_PATH include /opt/llvm-5.0.0/lib64
+
+* cmake 
+** download
+
+   #+BEGIN_SRC sh
+	 curl https://cmake.org/files/v3.10/cmake-3.10.1.tar.gz
+	 tar -zxvf cmake-3.10.1.tar.gz
+   #+END_SRC
+
+** install
+
+   #+BEGIN_SRC sh
+	 ./bootstrap
+	 make
+	 make install
+   #+END_SRC
+
+* boost 1.66	
+** download
+
+   #+BEGIN_SRC sh
+	 wget https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.tar.gz
+	 tar -zxvf boost_1_66_0.tar.gz
+   #+END_SRC
+** install
+
+   #+BEGIN_SRC sh
+	 ./bootstrap.sh --prefix=path/to/installation/prefix
+	 ./b2 install
+   #+END_SRC
+
+
