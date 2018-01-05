@@ -1,10 +1,8 @@
 #+TITLE: 配置多个 git 账户
 #+DATE: 2016-07-26
-#+SETUPFILE: /home/huaming_li/github/blog/setupfile.org
-#+JEKYLL_LAYOUT: post
-#+JEKYLL_CATEGORIES: summary
-#+JEKYLL_TAGS: git
-#+JEKYLL_PUBLISHED: true
+#+LAYOUT: post
+#+CATEGORIES: summary
+#+TAGS: git
 
 * 配置多个 git 账户
  在使用 ssh keys 时常因为有多个 git 账户，无法正常使用

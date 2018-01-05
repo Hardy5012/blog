@@ -3,7 +3,7 @@
 #+LAYOUT: post
 #+OPTIONS: ^:nil
 #+TAGS: C++
-#+CATEGORIES: Mordern C++
+#+CATEGORIES: Modern C++
 
 * item 5: 尽量用 auto 代替显式类型声明
 

@@ -3,7 +3,7 @@
 #+LAYOUT: post
 #+OPTIONS: ^:nil
 #+TAGS: C++
-#+CATEGORIES: Mordern C++
+#+CATEGORIES: Modern C++
 
 * item 7: 区别使用（）和{}创建对象
 ** 记住
@@ -200,3 +200,99 @@
 + typedef 不支持模板化，但是别名声明支持。
 + 别名模板避免了使用"::type"后缀，而且在模板中使用 typedef 还需要在前面加上 typename
 + C++14 提供了 C++11 所有类型转换的别名声明版本
+* item 10:Prefer scoped enums to unscoped enums
+unscoped enums
+
+#+BEGIN_SRC C++
+  enum Color { black, white, red }; // black, white, red are
+  // in same scope as Color
+  auto white = false; // error! white already
+  // declared in this scope
+#+END_SRC
+
+因为 scoped enum 是通过 enum class 声明，所以它们有时候也被称为 *枚举类* (enum classes)。
+
+#+BEGIN_SRC C++
+  enum class Color { black, white, red }; // black, white, red
+  // are scoped to Color
+  auto white = false; // fine, no other,
+  // "white" in scope
+  Color c = white; // error! no enumerator named
+  // "white" is in this scope
+  Color c = Color::white; // fine
+  auto c = Color::white; // also fine (and in accord
+  // with Item 5's advice)
+#+END_SRC
+在下面场景中 uncoped enums 会有用：
+定义一个 std::tuple
+
+#+BEGIN_SRC C++
+  using UserInfo = // type alias; see Item 9
+	  std::tuple<std::string, // name
+				 std::string, // email
+				 std::size_t> ; // reputation
+
+  UserInfo uInfo; // object of tuple type
+  …
+  auto val = std::get<1>(uInfo); // get value of field 1
+#+END_SRC
+此时记住第 1 个字段是 email 并不合理，此时可用 unscoped enums 对应每个字段的名称
+
+#+BEGIN_SRC C++
+  enum UserInfoFields { uiName, uiEmail, uiReputation };
+  UserInfo uInfo; // as before
+  …
+  auto val = std::get<uiEmail>(uInfo); // ah, get value of
+  // email field
+#+END_SRC
+使用 UserInfoFields 隐式转换成 std::size_t，赋给 std::get。scoped enums 更繁琐：
+
+#+BEGIN_SRC C++
+  enum class UserInfoFields { uiName, uiEmail, uiReputation };
+  UserInfo uInfo; // as before
+  …
+  auto val =
+	  std::get<static_cast<std::size_t>(UserInfoFields::uiEmail)>
+	  (uInfo);
+#+END_SRC
+使用 std::underlying_type 获取 enums 的底层类型。模板函数 toUType 接受一个任意的枚举常量，并且可以作为一个编译时常量返回它的值
+
+#+BEGIN_SRC C++
+  template<typename E>
+  constexpr typename std::underlying_type<E>::type
+  toUType(E enumerator) noexcept
+  {
+	  return
+		  static_cast<typename
+					  std::underlying_type<E>::type>(enumerator);
+  }
+#+END_SRC
+
+在 C++14 中可简化
+
+#+BEGIN_SRC C++
+  template<typename E> // C++14
+  constexpr std::underlying_type_t<E>
+  toUType(E enumerator) noexcept
+  {
+	  return static_cast<std::underlying_type_t<E>>(enumerator);
+  }
+
+  template<typename E> // C++14
+  constexpr auto
+  toUType(E enumerator) noexcept
+  {
+	  return static_cast<std::underlying_type_t<E>>(enumerator);
+  }
+
+  auto val = std::get<toUType(UserInfoFields::uiEmail)>(uInfo);
+#+END_SRC
+
+** 记住：
++ scoped enums 的枚举常量只在本 enum 内可见，因为是强类型的，要转换成其它类型只能使用 cast.
++ scoped enums 和 unscoped enums 都有底层类型。只是 scoped enums 的底层类型是 int,
+unscoped enums 没有默认底层类型。
++ scoped enums 总是可向前声明，而 unscoped enums 只有声明底层类型时才可向前声明。
+
+* 参考
+effective-modern-c++

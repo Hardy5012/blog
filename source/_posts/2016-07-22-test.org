@@ -1,10 +1,8 @@
 #+TITLE: 学习 Spacemacs
 #+DATE: 2016-07-22
-#+SETUPFILE: /home/huaming_li/github/blog/setupfile.org
-#+JEKYLL_LAYOUT: post
-#+JEKYLL_CATEGORIES: notes
-#+JEKYLL_TAGS: spacemacs
-#+JEKYLL_PUBLISHED: true
+#+LAYOUT: post
+#+CATEGORIES: notes
+#+TAGS: spacemacs
 
 * 安装 
 ** 下载，最新下载地址 http://ftpmirror.gnu.org/emacs/emacs-25.2.tar.xz
@@ -39,6 +37,12 @@
      }
    #+END_SRC
   更多内容 http://doc.norang.ca/org-mode.html 
+*** 在 org-mode 中插入图片
++ 修改 hexo _config.yml 设置 post_asset_folder: true
++ 创建一个与文件同名的一级目录（TODO：修改 org-download-screenshot 去掉这步）
++ 使用 org-download-screenshot 截图
+#+DOWNLOADED: /tmp/screenshot.png @ 2018-01-02 10:24:31
+[[file:2016-07-22-test/screenshot_2017-12-31_17-12-09.png]]
 {{{more}}}
 ** 配置 C＋＋环境
 **** 格式化：C－x h 全屏选择, C-M \进行格式化
