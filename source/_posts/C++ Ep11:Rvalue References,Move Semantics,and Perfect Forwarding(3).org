@@ -15,6 +15,7 @@ Item 26 中的第一个例子（logAndAdd）就是一个典型的例子，很多
 那只要简单地对即将重载的函数进行不同的命名即可。举个例子，两个 logAndAdd 重载能被分割成 logAndAddName 和
 logAndAddNameIdx。可惜的是，这个方法不能在第二个例子（Person 构造函数）中工作，因为构造函数的名字是由语言固定的。
 再说了，谁又想放弃重载呢？
+#+HTML: <!-- more -->
 ** 通过 const T&传参数
 另一个选择是回到 C++98，并且把 pass-by-universal-reference（通过 universal 引用传参数）
 替换成 pass-by-lvalue-reference-to-const（通过 const 左值引用传参数）。事实上，这是 Item 26 考虑的第一个方法。
@@ -211,8 +212,7 @@ std::enable_if 的细节可查找 *SFINAE* (Substitution Failure Is Not An Error
 
 如果我们考虑地更精确一些，我们会意识到，当我们在说“Person 的模板化构造函数只有在 T 不是 Person 时才有效”时，
 对于 T，我们会想要忽略：
-+ 它是否是一个引用。对于决定 universal 引用构造函数是否是有效的，Person，Person
-&,以及 Person&&都应该和 Person 相同。
++ 它是否是一个引用。对于决定 universal 引用构造函数是否是有效的，Person，Person&,以及 Person&&都应该和 Person 相同。
 + 它是否是 const 或 volatile 的。就我们而言，一个 const Person 和一个 volatile Person 以及一个 const volatile Person 和一个 Person 都是一样的。
 
 这意味着，在检查 T 和 Person 是否相同之前，我们需要一个办法来去除 T 的引用，const，volatile 属性。

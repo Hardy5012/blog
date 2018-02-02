@@ -105,3 +105,47 @@ Yum repositories commonly provide their own .repo file. To add such a repository
    #+END_SRC
 
 
+* protobuf 
+** download
+
+   #+BEGIN_SRC sh
+	 git clone git@github.com:google/protobuf.git
+	 cd protobuf && git checkout v3.5.1.1
+
+   #+END_SRC
+** install
+
+   #+BEGIN_SRC C++
+	 ./configure --prefix=/usr/local/protobuf3
+		   make
+		   make check
+		   sudo make install
+		   sudo ldconfig
+   #+END_SRC
+** modify .bashrc 
+   #+BEGIN_SRC sh
+	 export PKG_CONFIG_PATH=/usr/local/protobuf3/lib/pkgconfig/
+	 export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH:/usr/local/protobuf3/lib
+	 export PATH=$PATH:/usr/local/protobuf3/bin
+
+	 export CMAKE_INCLUDE_PATH=/usr/local/protobuf3/include/
+	 export CMAKE_LIBRARY_PATH=/usr/local/protobuf3/lib
+   #+END_SRC
+* oracle 11.2
+** download 
+   http://www.oracle.com/technetwork/cn/topics/linuxx86-64soft-092277.html#ic_x64_inst
+** install
+
+   #+BEGIN_SRC sh
+	 sudo yum install oracle-instantclient11.2-basic-11.2.0.4.0-1.x86_64.rpm 
+	 sudo yum install oracle-instantclient11.2-devel-11.2.0.4.0-1.x86_64.rpm 
+
+   #+END_SRC
+** modify .bashrc
+
+   #+BEGIN_SRC sh
+	 export ORACLE_HOME=/usr/lib/oracle/11.2/client64
+	 export TNS_ADMIN=$ORACLE_HOME/network/admin
+	 export PATH=$PATH:$ORACLE_HOME/bin
+	 export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH:$ORACLE_HOME/lib
+   #+END_SRC
