@@ -295,3 +295,4 @@ std::packaged_task 不能被拷贝，所以当把 pt 传递给一个 std::thread
 * 参考
   原文：effective-modern-c++
   翻译：http://blog.csdn.net/big_yellow_duck/article/category/635234
+  

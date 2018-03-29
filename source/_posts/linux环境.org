@@ -1,6 +1,7 @@
 #+TITLE: linux 环境
 #+DATE: 2017-11-16
 #+LAYOUT: post
+#+OPTIONS: ^:nil
 #+TAGS: linux
 #+CATEGORIES: notes
 
@@ -71,7 +72,7 @@ Yum repositories commonly provide their own .repo file. To add such a repository
 	 yum-config-manager --enable  alonid-llvm-5.0.0-epel-7
    #+END_SRC
  [[https://copr.fedorainfracloud.org/coprs/alonid/llvm-5.0.0/][fedora cop]]r 会提供最新安装包的 repo
-** yum install clang-5.0.0
+** yum install clang-5.0.0 && yum install clang-5.0.0-devel
 ** You may need to set PATH to include /opt/llvm-5.0.0/bin. LD_LIBRARY_PATH include /opt/llvm-5.0.0/lib64
 
 * cmake 
