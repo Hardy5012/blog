@@ -105,8 +105,8 @@ autoen 可自动加载环境变量
 ** Install pip for Python 3:
 
 #+BEGIN_SRC sh
-  wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tar.xz 
-  tar --xz -xvf Python-3.6.1.tar.xz
+  wget https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tar.xz 
+  tar --xz -xvf Python-3.6.5.tar.xz
   sudo ./configure --prefix=/usr/local/python3
   sudo make && sudo make install
   sudo ln -s /usr/local/python3/bin/python3 /usr/bin/python3
